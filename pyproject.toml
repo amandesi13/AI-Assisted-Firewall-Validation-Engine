@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "firewall-validation-engine"
+version = "0.1.0"
+description = "AI-assisted firewall rule validation and packet-flow simulation engine."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Amandeep Singh", email = "amandeep.dev.eu@gmail.com" }
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+firewall-validate = "firewall_validation_engine.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

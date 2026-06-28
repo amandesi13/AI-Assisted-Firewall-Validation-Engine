@@ -1,0 +1,69 @@
+{
+  "name": "sample-telecom-edge",
+  "default_action": "deny",
+  "rules": [
+    {
+      "id": "allow-web-public",
+      "action": "allow",
+      "source": "0.0.0.0/0",
+      "destination": "10.10.2.0/24",
+      "protocol": "tcp",
+      "ports": [80, 443],
+      "description": "Public web access to edge application tier"
+    },
+    {
+      "id": "allow-ssh-public",
+      "action": "allow",
+      "source": "0.0.0.0/0",
+      "destination": "10.10.2.15/32",
+      "protocol": "tcp",
+      "ports": [22],
+      "description": "Temporary admin access"
+    },
+    {
+      "id": "allow-partner-any",
+      "action": "allow",
+      "source": "198.51.100.0/24",
+      "destination": "10.10.3.0/24",
+      "protocol": "any",
+      "ports": "any",
+      "description": "Partner integration network"
+    },
+    {
+      "id": "deny-partner-db",
+      "action": "deny",
+      "source": "198.51.100.0/24",
+      "destination": "10.10.3.25/32",
+      "protocol": "tcp",
+      "ports": [5432],
+      "description": "Block partner access to database"
+    },
+    {
+      "id": "allow-dns",
+      "action": "allow",
+      "source": "10.10.0.0/16",
+      "destination": "10.20.0.53/32",
+      "protocol": "udp",
+      "ports": [53],
+      "description": "Internal DNS"
+    },
+    {
+      "id": "allow-dns-duplicate",
+      "action": "allow",
+      "source": "10.10.0.0/16",
+      "destination": "10.20.0.53/32",
+      "protocol": "udp",
+      "ports": [53],
+      "description": "Duplicate DNS rule"
+    },
+    {
+      "id": "deny-all",
+      "action": "deny",
+      "source": "any",
+      "destination": "any",
+      "protocol": "any",
+      "ports": "any",
+      "description": "Explicit fallback deny"
+    }
+  ]
+}
