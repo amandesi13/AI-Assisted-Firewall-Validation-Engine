@@ -1,5 +1,15 @@
 # AI-Assisted Firewall Validation Engine
 
+[![tests](https://github.com/amandesi13/AI-Assisted-Firewall-Validation-Engine/actions/workflows/tests.yml/badge.svg)](https://github.com/amandesi13/AI-Assisted-Firewall-Validation-Engine/actions/workflows/tests.yml)
+[![demo](https://github.com/amandesi13/AI-Assisted-Firewall-Validation-Engine/actions/workflows/pages.yml/badge.svg)](https://amandesi13.github.io/AI-Assisted-Firewall-Validation-Engine/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://www.python.org/)
+[![dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen)](pyproject.toml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+**[Live demo](https://amandesi13.github.io/AI-Assisted-Firewall-Validation-Engine/)**: validate a policy and simulate packets in your browser. The real engine runs client-side on Pyodide (WebAssembly), so nothing is uploaded.
+
+[![Browser demo: findings, packet simulator and rule table](docs/demo.png)](https://amandesi13.github.io/AI-Assisted-Firewall-Validation-Engine/)
+
 A Python-based firewall rule validation engine that simulates packet flow, detects risky rule behavior, and generates human-readable review notes for security and network engineering workflows.
 
 The project is designed around the kind of validation work used in production telecom and infrastructure environments: deterministic rule evaluation first, explainable anomaly detection second.
@@ -128,3 +138,14 @@ This engine demonstrates how deterministic validation and AI-assisted review can
 1. The rule engine explains what the firewall will actually do.
 2. The analyzer identifies risky or redundant behavior.
 3. The advisor translates findings into review notes a developer or security engineer can act on.
+
+## Browser demo
+
+`web/` holds a static page that loads this package into [Pyodide](https://pyodide.org) and calls
+`web/bridge.py` (JSON in, JSON out; covered by `tests/test_web_bridge.py`). The `demo` workflow
+builds it with `python web/build_site.py` and deploys it to GitHub Pages on every push to `main`.
+
+```bash
+python web/build_site.py _site
+python -m http.server -d _site 8000   # http://localhost:8000
+```
